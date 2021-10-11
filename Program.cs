@@ -13,6 +13,18 @@ namespace UDPBroadcastSender
     {
         static void Main(string[] args)
         {
+            int pPort = 00000;
+            Console.WriteLine("input port #:");
+            string t = Console.ReadLine();
+            try
+            {
+                pPort = Convert.ToInt32(t);
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine("Failed due to : "+e.ToString());
+            }
+            Console.WriteLine("Sending on Port: " + pPort);
             //using socket constructor takes 3 parameters~
             //address family interNetwork means we are using IPv4
             //SocketType Dgram means we are using dataGram media
@@ -26,8 +38,8 @@ namespace UDPBroadcastSender
             //first is the IP address
             //second is the Port
             //ensure you are matching the same family as the Socket declared earlier on line 19
-            //IPAddress.Parse parses the string value based on IP Address format, and the 2300 is the port used
-            IPEndPoint broadcastEp = new IPEndPoint(IPAddress.Parse("255.255.255.255"), 23000);
+            //IPAddress.Parse parses the string value based on IP Address format, and pPort is the port used
+            IPEndPoint broadcastEp = new IPEndPoint(IPAddress.Parse("255.255.255.255"), pPort);
             //define an array of bytes to contain data that will be broadcasted
             //{0x0D, 0x0A}stands for /r/n
             byte[] broadCastBuffer = new byte[] {0x0D, 0x0A};
